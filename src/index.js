@@ -15,12 +15,13 @@ app.use(require('./routes'));
 
 // expect an environment variable or first command line arg
 // to specify the port at runtime
-const port = process.env['PORT'] || process.argv[2] || 3000;
+const port = process.env.PORT || process.argv[2] || 3000;
+const hostname = process.env.LISTEN_INTERFACE || 'localhost';
 
 // start listening on the defined port
-const server = app.listen(port, function ()
+const server = app.listen(port, hostname, function ()
 {
-	console.log(`Listening on port ${server.address().port}`);
+	console.log(`Listening on ${server.address().address} port ${server.address().port}`);
 });
 
 // export the server
